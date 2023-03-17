@@ -2,6 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { LectureService } from './lecture.service';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { UpdateLectureDto } from './dto/update-lecture.dto';
+import {NotFoundException} from "@nestjs/common"
+
+
 
 @Controller('lecture')
 export class LectureController {
@@ -19,16 +22,26 @@ export class LectureController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.lectureService.findOne(+id);
+    return this.lectureService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLectureDto: UpdateLectureDto) {
-    return this.lectureService.update(+id, updateLectureDto);
+  async update(@Param('id') id: string, @Body() updateLectureDto: UpdateLectureDto) {
+    const lecture = await this.lectureService.update(id, updateLectureDto);
+    if(!lecture){
+      throw new NotFoundException('lecture not found!')
+    }
+    return lecture;
   }
 
+
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.lectureService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const lecture = await this.lectureService.remove(id);
+    if(!lecture){
+      throw new NotFoundException('lecture not found!')
+
+    }
+    return lecture;
   }
 }

@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { UpdateLectureDto } from './dto/update-lecture.dto';
+import { Lecture, lectureDocument } from './entities/lecture.entity';
 
 @Injectable()
 export class LectureService {
-  create(createLectureDto: CreateLectureDto) {
-    return 'This action adds a new lecture';
+  constructor(@InjectModel('Lecture') private lectureModel: Model<lectureDocument>){}
+  async create(createLectureDto: CreateLectureDto): Promise<Lecture> {
+    const newLecture = new this.lectureModel(createLectureDto);
+    return await newLecture.save();
   }
 
-  findAll() {
-    return `This action returns all lecture`;
+  async findAll(): Promise<Lecture[]> {
+    return await this.lectureModel.find().populate({path: "category", select: "title"}).exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} lecture`;
+  async findOne(id: string) : Promise<Lecture>{
+    return await this.lectureModel.findById(id).populate({path: "category", select: "title"}).exec();
   }
 
-  update(id: number, updateLectureDto: UpdateLectureDto) {
-    return `This action updates a #${id} lecture`;
+  async update(id: string, updateLectureDto: UpdateLectureDto): Promise<Lecture> {
+    return await this.lectureModel.findByIdAndUpdate(id, updateLectureDto, {
+      new: true
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} lecture`;
+  async remove(id: string) {
+    return await this.lectureModel.findByIdAndDelete(id);
   }
 }

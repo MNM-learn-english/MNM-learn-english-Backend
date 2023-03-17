@@ -9,6 +9,7 @@ import { CategoryModule } from './category/category.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CurrentUserInterceptor } from './user/interceptors/current-user-interceptor';
 import { LectureModule } from './lecture/lecture.module';
+import { VocabularyModule } from './vocabulary/vocabulary.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { LectureModule } from './lecture/lecture.module';
     }),
     UserModule,
     CategoryModule,
-    LectureModule
+    LectureModule,
+    VocabularyModule
   ],
   controllers: [AppController],
   providers: [
