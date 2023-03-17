@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 import { UserLevelEnum } from "../dto/user-level-interface";
-
+import { Exclude } from "class-transformer";
 
 
 export type UserDocument = HydratedDocument<User>;
@@ -15,6 +15,7 @@ export class User {
     email: string;
 
     @Prop({required: true})
+    @Exclude()
     password: string;
 
     @Prop({required: true, unique: true})

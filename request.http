@@ -2,35 +2,10 @@
 GET http://localhost:3000/user
 
 
-
-###
-POST http://localhost:3000/user
-Content-Type: application/json
-
-{
-    "userName": "mohamadhasanT",
-    "email": "tabrizi.mohamadhasan@yahoo.com",
-    "mobileNumber": "+989142371302",
-    "password": "95440012WEek",
-    "avatar": "avatar.png",
-    "level": "upper-Intermediate"
-}
-
 ###
 GET http://localhost:3000/user/63f11c9b0a21703294493137
 Content-Type: application/json
 
-{
-
-}
-
-###
-PATCH http://localhost:3000/user/63f11c9b0a21703294493137
-Content-Type: application/json
-
-{
-    "userName": "mohamadhasanTab"
-}
 
 ###
 DELETE http://localhost:3000/user/63f1293e0a2170329449313b
@@ -47,10 +22,31 @@ Content-Type: application/json
 
 {
     "userName": "mohamadhasanT",
-    "email": "tabrizi.test@yahoo.com",
-    "mobileNumber": "+989142371302",
+    "email": "tbz.mohamadhasanT@yahoo.com",
+    "mobileNumber": "+989142371301",
     "password": "95440012WEek",
     "avatar": "avatar.png",
     "level": "upper-Intermediate"
 }
 
+
+###
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "tbz.mohamadhasan@yahoo.com",
+    "password": "95440012WEek"
+}
+
+###
+POST http://localhost:3000/auth/signout
+Content-Type: application/json
+
+{
+
+}
+
+
+###
+GET http://localhost:3000/auth/me
