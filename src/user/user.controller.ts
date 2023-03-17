@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Serialize } from './interceptors copy/serialize-interceptor';
+import { Serialize } from '../interceptors/serialize-interceptor';
 import { UserDto } from './dto/user-dto';
 
 @Serialize(UserDto)

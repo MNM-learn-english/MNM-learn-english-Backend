@@ -5,6 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { CategoryModule } from './category/category.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CurrentUserInterceptor } from './user/interceptors/current-user-interceptor';
+import { LectureModule } from './lecture/lecture.module';
 
 @Module({
   imports: [
@@ -22,9 +26,14 @@ import { UserModule } from './user/user.module';
 
       } 
     }),
-    UserModule
+    UserModule,
+    CategoryModule,
+    LectureModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    
+  ],
 })
 export class AppModule {}

@@ -50,3 +50,43 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/auth/me
+
+
+
+###################################### CATEGORY ###################################
+
+###
+GET http://localhost:3000/category
+
+###
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+    "title": "Oxford word skills",
+    "description": "it is the graphical interface of oxford word skills book",
+    "avatar": "category_avatar.png"
+}
+
+###
+GET http://localhost:3000/category/6414e61e945e9af71843537a
+Content-Type: application/json
+
+###
+PATCH  http://localhost:3000/category/6414e61e945e9af71843537a
+Content-Type: application/json
+
+{
+    "title": "Oxford word skills",
+    "description": "containg 3 level of oxford word skills books with a brand new training method",
+    "avatar": "category_avatar.png"
+}
+
+
+###
+DELETE http://localhost:3000/category/6414e61e945e9af71843537a
+Content-Type: application/json
+
+{
+
+}
