@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+    command: npm run start:dev
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+  mongo:
+    image: 'mongo:4.4.18'
+    volumes:
+      - ~/mongo:/data/db
+    ports:
+      - '27017:27017'
+
+

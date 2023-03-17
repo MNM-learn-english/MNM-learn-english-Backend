@@ -1,0 +1,56 @@
+###
+GET http://localhost:3000/user
+
+
+
+###
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "userName": "mohamadhasanT",
+    "email": "tabrizi.mohamadhasan@yahoo.com",
+    "mobileNumber": "+989142371302",
+    "password": "95440012WEek",
+    "avatar": "avatar.png",
+    "level": "upper-Intermediate"
+}
+
+###
+GET http://localhost:3000/user/63f11c9b0a21703294493137
+Content-Type: application/json
+
+{
+
+}
+
+###
+PATCH http://localhost:3000/user/63f11c9b0a21703294493137
+Content-Type: application/json
+
+{
+    "userName": "mohamadhasanTab"
+}
+
+###
+DELETE http://localhost:3000/user/63f1293e0a2170329449313b
+Content-Type: application/json
+
+{
+
+}
+
+
+###
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "userName": "mohamadhasanT",
+    "email": "tabrizi.test@yahoo.com",
+    "mobileNumber": "+989142371302",
+    "password": "95440012WEek",
+    "avatar": "avatar.png",
+    "level": "upper-Intermediate"
+}
+
