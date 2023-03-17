@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -24,11 +24,20 @@ export class CategoryController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return await this.categoryService.update(id, updateCategoryDto);
+    const category = await this.categoryService.update(id, updateCategoryDto);
+    if(!category){
+      throw new NotFoundException('category not found!')
+    }
+    return category;
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.categoryService.remove(id);
+    const category = this.categoryService.remove(id);
+    if(!category){
+      throw new NotFoundException('category not found!')
+    }
+    return category;
+
   }
 }
