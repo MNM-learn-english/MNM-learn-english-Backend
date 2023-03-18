@@ -54,6 +54,9 @@ GET http://localhost:3000/auth/me
 
 
 ###################################### CATEGORY ###################################
+###################################### CATEGORY ###################################
+###################################### CATEGORY ###################################
+###################################### CATEGORY ###################################
 
 ###
 GET http://localhost:3000/category
@@ -63,8 +66,8 @@ POST http://localhost:3000/category
 Content-Type: application/json
 
 {
-    "title": "Oxford word skills",
-    "description": "it is the graphical interface of oxford word skills book",
+    "title": "words for ielts",
+    "description": "it is the graphical interface for ielts book",
     "avatar": "category_avatar.png"
 }
 
@@ -85,6 +88,148 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/category/6414e61e945e9af71843537a
+Content-Type: application/json
+
+{
+
+}
+
+
+###################################### LECTURE ###################################
+###################################### LECTURE ###################################
+###################################### LECTURE ###################################
+
+###
+GET http://localhost:3000/lecture
+
+###
+POST http://localhost:3000/lecture
+Content-Type: application/json
+
+{
+    "title": "i can talk about sports",
+    "level": "pre-Intermediate",
+    "videos": ["video1.mkv", "video2.mkv", "video3.mkv"],
+    "avatar": "lecture1_avatar.png",
+    "context": "it is a context about passage that contains bolded vocabulary",
+    "category": "64154555153e9066bec76108"
+}
+
+###
+GET http://localhost:3000/lecture/6414f7fa4c94c70a56535551
+Content-Type: application/json
+
+###
+PATCH  http://localhost:3000/lecture/6414f7fa4c94c70a56535551
+Content-Type: application/json
+
+{
+    "title": "i can talk about sports",
+    "level": "upper-Intermediate",
+    "videos": ["video1.mkv", "video2.mkv", "video3.mkv"],
+    "avatar": "lecture1_avatar.png",
+    "context": "it is a context about passage that contains bolded vocabulary",
+    "category": "6414e7232fb435914c30896f"
+}
+
+
+###
+DELETE http://localhost:3000/lecture/6414f8324c94c70a56535556
+Content-Type: application/json
+
+{
+
+}
+
+
+
+###################################### VOCABULARY ###################################
+###################################### VOCABULARY ###################################
+###################################### VOCABULARY ###################################
+
+###
+GET http://localhost:3000/vocabulary
+
+###
+POST http://localhost:3000/vocabulary
+Content-Type: application/json
+
+{
+    "title": "courte",
+    "pronounce": "cert",
+    "translationFa": "زمین تنیس",
+    "avatar": "court.png",
+    "example":"place that people play tenis",
+    "level": "Intermediate",
+    "lecture": "64154564153e9066bec7610b",
+    "type": "noun",
+    "meaning": "The official person in control in some sports",
+    "category": ["64154555153e9066bec76108"]
+}
+
+###
+GET http://localhost:3000/vocabulary/641508ae5457ecde8c4ba427
+Content-Type: application/json
+
+###
+PATCH  http://localhost:3000/vocabulary/641508ae5457ecde8c4ba427
+Content-Type: application/json
+
+{
+    "category": ["6414e7232fb435914c30896f"]
+}
+
+
+###
+DELETE http://localhost:3000/vocabulary/6415083e7a6e2aeff57aab1d
+Content-Type: application/json
+
+{
+
+}
+
+
+
+
+###################################### USER_MEMORY_VOCAB ###################################
+###################################### USER_MEMORY_VOCAB ###################################
+###################################### USER_MEMORY_VOCAB ###################################
+
+###
+GET http://localhost:3000/user-vocab-memory
+
+###
+POST http://localhost:3000/user-vocab-memory
+Content-Type: application/json
+
+{
+    "user": "64154546153e9066bec76100",
+    "vocabulary": "6415457e153e9066bec7610e",
+    "lecture": "64154564153e9066bec7610b",
+    "category": "64154555153e9066bec76108"
+}
+
+###
+GET http://localhost:3000/user-vocab-memory/64153ed640a100ea7a2a9cc9
+Content-Type: application/json
+
+###
+PATCH  http://localhost:3000/user-vocab-memory/6415459e153e9066bec76113/correct
+Content-Type: application/json
+
+{
+    
+}
+###
+PATCH  http://localhost:3000/user-vocab-memory/6415459e153e9066bec76113/wrong
+Content-Type: application/json
+
+{
+    
+}
+
+###
+DELETE http://localhost:3000/user-vocab-memory/6415083e7a6e2aeff57aab1d
 Content-Type: application/json
 
 {

@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateVocabularyDto } from './dto/create-vocabulary.dto';
 import { UpdateVocabularyDto } from './dto/update-vocabulary.dto';
+import { Vocabulary, vocabularyDocument } from './entities/vocabulary.entity';
 
 @Injectable()
 export class VocabularyService {
-  create(createVocabularyDto: CreateVocabularyDto) {
-    return 'This action adds a new vocabulary';
+  constructor(@InjectModel('Vocabulary') private vocabularyModel: Model<vocabularyDocument>){}
+
+  async create(createVocabularyDto: CreateVocabularyDto): Promise<Vocabulary> {
+    const newVocab = new this.vocabularyModel(createVocabularyDto);
+    return await newVocab.save();
   }
 
-  findAll() {
-    return `This action returns all vocabulary`;
+  async findAll(): Promise<Vocabulary[]> {
+    return await this.vocabularyModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} vocabulary`;
+  async findOne(id: string): Promise<Vocabulary> {
+    return await this.vocabularyModel.findById(id).exec();
   }
 
-  update(id: number, updateVocabularyDto: UpdateVocabularyDto) {
-    return `This action updates a #${id} vocabulary`;
+  async update(id: string, updateVocabularyDto: UpdateVocabularyDto): Promise<Vocabulary> {
+    return await this.vocabularyModel.findByIdAndUpdate(id, updateVocabularyDto, {
+      new: true
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} vocabulary`;
+  async remove(id: string) {
+    return await this.vocabularyModel.findByIdAndDelete(id);
   }
 }

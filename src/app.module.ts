@@ -10,6 +10,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CurrentUserInterceptor } from './user/interceptors/current-user-interceptor';
 import { LectureModule } from './lecture/lecture.module';
 import { VocabularyModule } from './vocabulary/vocabulary.module';
+import { UserVocabMemoryModule } from './user-vocab-memory/user-vocab-memory.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { VocabularyModule } from './vocabulary/vocabulary.module';
     UserModule,
     CategoryModule,
     LectureModule,
-    VocabularyModule
+    VocabularyModule,
+    UserVocabMemoryModule
   ],
   controllers: [AppController],
   providers: [

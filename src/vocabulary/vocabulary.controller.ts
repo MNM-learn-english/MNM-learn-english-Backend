@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { VocabularyService } from './vocabulary.service';
 import { CreateVocabularyDto } from './dto/create-vocabulary.dto';
 import { UpdateVocabularyDto } from './dto/update-vocabulary.dto';
@@ -18,17 +18,29 @@ export class VocabularyController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.vocabularyService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const vocabulary = await this.vocabularyService.findOne(id);
+    if(!vocabulary){
+      throw new NotFoundException('Vocabulary not found!')
+    }
+    return vocabulary;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVocabularyDto: UpdateVocabularyDto) {
-    return this.vocabularyService.update(+id, updateVocabularyDto);
+  async update(@Param('id') id: string, @Body() updateVocabularyDto: UpdateVocabularyDto) {
+    const vocabulary = await this.vocabularyService.update(id, updateVocabularyDto);
+    if(!vocabulary){
+      throw new NotFoundException('Vocabulary not found!')
+    }
+    return vocabulary;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.vocabularyService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const vocab = await this.vocabularyService.remove(id);
+    if(!vocab){
+      throw new NotFoundException('Vocabulary not found!')
+    }
+    return vocab;
   }
 }
