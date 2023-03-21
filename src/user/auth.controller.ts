@@ -19,7 +19,6 @@ export class AuthController {
         return user;
     }
     
-    
 
     @Post('/signup')
     async signup(@Body() body: CreateUserDto, @Session() session: any){

@@ -10,14 +10,13 @@ import { Lecture, lectureDocument } from './entities/lecture.entity';
 export class LectureService {
   constructor(@InjectModel('Lecture') private lectureModel: Model<lectureDocument>){}
 
-  async create(createLectureDto: CreateLectureDto, category: string): Promise<Lecture> {
-    Object.assign(createLectureDto, {category})
+  async create(createLectureDto: CreateLectureDto): Promise<Lecture> {
     const newLecture = new this.lectureModel(createLectureDto);
     return await newLecture.save();
   }
 
-  async findAll(category: string): Promise<Lecture[]> {
-    return await this.lectureModel.find({category}).populate({path: "category", select: "title"}).exec();
+  async findAll(): Promise<Lecture[]> {
+    return await this.lectureModel.find().populate({path: "category", select: "title"}).exec();
   }
 
   async findOne(id: string) : Promise<Lecture>{

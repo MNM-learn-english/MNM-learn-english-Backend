@@ -9,14 +9,14 @@ import { Vocabulary, vocabularyDocument } from './entities/vocabulary.entity';
 export class VocabularyService {
   constructor(@InjectModel('Vocabulary') private vocabularyModel: Model<vocabularyDocument>){}
 
-  async create(createVocabularyDto: CreateVocabularyDto, category: string, lecture: string): Promise<Vocabulary> {
-    Object.assign(createVocabularyDto, {category, lecture})
+  async create(createVocabularyDto: CreateVocabularyDto): Promise<Vocabulary> {
+    Object.assign(createVocabularyDto)
     const newVocab = new this.vocabularyModel(createVocabularyDto);
     return await newVocab.save();
   }
 
-  async findAll(category: string, lecture:string): Promise<Vocabulary[]> {
-    return await this.vocabularyModel.find({category, lecture}).exec();
+  async findAll(): Promise<Vocabulary[]> {
+    return await this.vocabularyModel.find().exec();
   }
 
   async findOne(id: string): Promise<Vocabulary> {

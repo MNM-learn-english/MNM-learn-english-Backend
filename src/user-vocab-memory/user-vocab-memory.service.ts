@@ -8,15 +8,14 @@ import { UserVocabMemory, userVocabMermoryDocument } from './entities/user-vocab
 @Injectable()
 export class UserVocabMemoryService {
   constructor(@InjectModel('UserVocabMemory') private userVocabMemoryModel: Model<userVocabMermoryDocument>){}
-  async create(createUserVocabMemoryDto: CreateUserVocabMemoryDto, category: string, lecture: string): Promise<UserVocabMemory> {
+  async create(createUserVocabMemoryDto: CreateUserVocabMemoryDto): Promise<UserVocabMemory> {
 
-    Object.assign(createUserVocabMemoryDto, {category, lecture});
     const userVocabMemory = new this.userVocabMemoryModel(createUserVocabMemoryDto);
     return await userVocabMemory.save();
   }
 
-  async findAll(category: string, lecture: string) : Promise<UserVocabMemory[]> {
-    return await this.userVocabMemoryModel.find({category, lecture}).populate({path:"vocabulary", select: "title"}).exec();
+  async findAll() : Promise<UserVocabMemory[]> {
+    return await this.userVocabMemoryModel.find().populate({path:"vocabulary", select: "title"}).exec();
   }
 
   async findOne(id: string): Promise<UserVocabMemory> {

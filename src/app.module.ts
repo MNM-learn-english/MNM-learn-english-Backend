@@ -6,12 +6,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
-import { APP_INTERCEPTOR, RouterModule } from '@nestjs/core';
-import { CurrentUserInterceptor } from './user/interceptors/current-user-interceptor';
 import { LectureModule } from './lecture/lecture.module';
 import { VocabularyModule } from './vocabulary/vocabulary.module';
 import { UserVocabMemoryModule } from './user-vocab-memory/user-vocab-memory.module';
-import cookieSession from 'cookie-session';
 import { CurrentUserMiddleWare } from './user/middlewares/current-user-middleware';
 
 @Module({
@@ -34,28 +31,7 @@ import { CurrentUserMiddleWare } from './user/middlewares/current-user-middlewar
     CategoryModule,
     LectureModule,
     VocabularyModule,
-    UserVocabMemoryModule,
-    RouterModule.register([{
-      path: "category",
-      module: CategoryModule,
-      children:[
-        {
-            path: ":categoryId/lecture",
-            module: LectureModule,
-            children:[
-              {
-                path: ":lectureId/vocabulary",
-                module: VocabularyModule,
-              },
-              {
-                path: ":lectureId/user-vocab-memory",
-                module: UserVocabMemoryModule,
-              }
-            ]
-          }
-      ]
-    }])
-    
+    UserVocabMemoryModule
   ],
   controllers: [AppController],
   providers: [

@@ -6,24 +6,20 @@ import { AuthGuard } from 'src/guards/auth.guard';
 
 
 @UseGuards(AuthGuard)
-@Controller()
+@Controller('user-vocab-memory')
 export class UserVocabMemoryController {
   constructor(private readonly userVocabMemoryService: UserVocabMemoryService) {}
 
   @Post()
   async create(
-    @Param('categoryId') categoryId: string,
-    @Param('lectureId') lectureId: string,
     @Body() createUserVocabMemoryDto: CreateUserVocabMemoryDto) {
-    return await this.userVocabMemoryService.create(createUserVocabMemoryDto,categoryId, lectureId);
+    return await this.userVocabMemoryService.create(createUserVocabMemoryDto);
   }
 
   @Get()
   async findAll(
-    @Param('categoryId') categoryId: string,
-    @Param('lectureId') lectureId: string,
   ) {
-    return await this.userVocabMemoryService.findAll(categoryId, lectureId);
+    return await this.userVocabMemoryService.findAll();
   }
 
   @Get(':id')

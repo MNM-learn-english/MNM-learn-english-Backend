@@ -7,18 +7,18 @@ import { AuthGuard } from 'src/guards/auth.guard';
 
 
 @UseGuards(AuthGuard)
-@Controller()
+@Controller('vocabulary')
 export class VocabularyController {
   constructor(private readonly vocabularyService: VocabularyService) {}
 
   @Post()
-  create(@Body() createVocabularyDto: CreateVocabularyDto, @Param('categoryId') categoryId: string ,@Param('lectureId') lectureId: string) {
-    return this.vocabularyService.create(createVocabularyDto, categoryId, lectureId);
+  create(@Body() createVocabularyDto: CreateVocabularyDto) {
+    return this.vocabularyService.create(createVocabularyDto);
   }
 
   @Get()
-  findAll(@Param('categoryId') categoryId: string ,@Param('lectureId') lectureId: string) {
-    return this.vocabularyService.findAll(categoryId, lectureId);
+  findAll() {
+    return this.vocabularyService.findAll();
   }
 
   @Get(':id')

@@ -8,19 +8,18 @@ import { AuthGuard } from 'src/guards/auth.guard';
 
 
 @UseGuards(AuthGuard)
-@Controller()
+@Controller('lecture')
 export class LectureController {
   constructor(private readonly lectureService: LectureService) {}
 
   @Post()
-  create(@Param('categoryId') categoryId: string ,@Body() createLectureDto: CreateLectureDto) {
-    return this.lectureService.create(createLectureDto, categoryId);
+  create(@Body() createLectureDto: CreateLectureDto) {
+    return this.lectureService.create(createLectureDto);
   }
 
   @Get()
-  findAll(@Param('categoryId') categoryId: string) {
-
-    return this.lectureService.findAll(categoryId);
+  findAll() {
+    return this.lectureService.findAll();
   }
 
   @Get(':id')
