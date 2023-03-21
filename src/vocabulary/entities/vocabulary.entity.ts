@@ -39,8 +39,8 @@ export class Vocabulary {
     @Prop({type: mongoose.Schema.Types.ObjectId, ref: "Lecture"})
     lecture: Lecture
 
-    @Prop([{type: mongoose.Schema.Types.ObjectId, ref: "Category"}])
-    category: Category[]
+    @Prop({type: mongoose.Schema.Types.ObjectId, ref: "Category"})
+    category: Category
 
 }
 

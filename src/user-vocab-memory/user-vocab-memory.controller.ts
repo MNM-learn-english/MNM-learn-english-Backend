@@ -1,20 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseGuards } from '@nestjs/common';
 import { UserVocabMemoryService } from './user-vocab-memory.service';
 import { CreateUserVocabMemoryDto } from './dto/create-user-vocab-memory.dto';
-import { UpdateUserVocabMemoryDto } from './dto/update-user-vocab-memory.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
-@Controller('user-vocab-memory')
+
+
+@UseGuards(AuthGuard)
+@Controller()
 export class UserVocabMemoryController {
   constructor(private readonly userVocabMemoryService: UserVocabMemoryService) {}
 
   @Post()
-  async create(@Body() createUserVocabMemoryDto: CreateUserVocabMemoryDto) {
-    return await this.userVocabMemoryService.create(createUserVocabMemoryDto);
+  async create(
+    @Param('categoryId') categoryId: string,
+    @Param('lectureId') lectureId: string,
+    @Body() createUserVocabMemoryDto: CreateUserVocabMemoryDto) {
+    return await this.userVocabMemoryService.create(createUserVocabMemoryDto,categoryId, lectureId);
   }
 
   @Get()
-  async findAll() {
-    return await this.userVocabMemoryService.findAll();
+  async findAll(
+    @Param('categoryId') categoryId: string,
+    @Param('lectureId') lectureId: string,
+  ) {
+    return await this.userVocabMemoryService.findAll(categoryId, lectureId);
   }
 
   @Get(':id')

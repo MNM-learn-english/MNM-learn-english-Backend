@@ -3,19 +3,20 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { VocabStatus } from 'src/vocabulary/dto/vocab-status-enum';
 import { CreateUserVocabMemoryDto } from './dto/create-user-vocab-memory.dto';
-import { UpdateUserVocabMemoryDto } from './dto/update-user-vocab-memory.dto';
 import { UserVocabMemory, userVocabMermoryDocument } from './entities/user-vocab-memory.entity';
 
 @Injectable()
 export class UserVocabMemoryService {
   constructor(@InjectModel('UserVocabMemory') private userVocabMemoryModel: Model<userVocabMermoryDocument>){}
-  async create(createUserVocabMemoryDto: CreateUserVocabMemoryDto): Promise<UserVocabMemory> {
+  async create(createUserVocabMemoryDto: CreateUserVocabMemoryDto, category: string, lecture: string): Promise<UserVocabMemory> {
+
+    Object.assign(createUserVocabMemoryDto, {category, lecture});
     const userVocabMemory = new this.userVocabMemoryModel(createUserVocabMemoryDto);
     return await userVocabMemory.save();
   }
 
-  async findAll() : Promise<UserVocabMemory[]> {
-    return await this.userVocabMemoryModel.find().populate({path:"vocabulary", select: "title"}).exec();
+  async findAll(category: string, lecture: string) : Promise<UserVocabMemory[]> {
+    return await this.userVocabMemoryModel.find({category, lecture}).populate({path:"vocabulary", select: "title"}).exec();
   }
 
   async findOne(id: string): Promise<UserVocabMemory> {

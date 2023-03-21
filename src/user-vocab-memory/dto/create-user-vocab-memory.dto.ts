@@ -14,12 +14,4 @@ export class CreateUserVocabMemoryDto {
     @IsNotEmpty()
     vocabulary: Vocabulary;
 
-    @IsString()
-    @IsNotEmpty()
-    lecture: Lecture;
-
-    @IsString()
-    @IsNotEmpty()
-    category: Category;
-
 }

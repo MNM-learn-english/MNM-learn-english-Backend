@@ -1,20 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseGuards } from '@nestjs/common';
 import { VocabularyService } from './vocabulary.service';
 import { CreateVocabularyDto } from './dto/create-vocabulary.dto';
 import { UpdateVocabularyDto } from './dto/update-vocabulary.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
-@Controller('vocabulary')
+
+
+@UseGuards(AuthGuard)
+@Controller()
 export class VocabularyController {
   constructor(private readonly vocabularyService: VocabularyService) {}
 
   @Post()
-  create(@Body() createVocabularyDto: CreateVocabularyDto) {
-    return this.vocabularyService.create(createVocabularyDto);
+  create(@Body() createVocabularyDto: CreateVocabularyDto, @Param('categoryId') categoryId: string ,@Param('lectureId') lectureId: string) {
+    return this.vocabularyService.create(createVocabularyDto, categoryId, lectureId);
   }
 
   @Get()
-  findAll() {
-    return this.vocabularyService.findAll();
+  findAll(@Param('categoryId') categoryId: string ,@Param('lectureId') lectureId: string) {
+    return this.vocabularyService.findAll(categoryId, lectureId);
   }
 
   @Get(':id')

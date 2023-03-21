@@ -6,5 +6,5 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
 ## Description
-Learn English Backend using Nest js typescrupt and mongo db
+Learn English Backend using Nest js typescript and mongo db
 

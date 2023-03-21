@@ -31,18 +31,11 @@ export class CreateVocabularyDto {
     level: UserLevelEnum;
 
     @IsString()
-    @IsNotEmpty()
-    lecture: Lecture
-
-    @IsString()
     type: VocabTypeEnum;
 
     @IsString()
     @IsNotEmpty()
     meaning: string;
 
-    @IsArray()
-    @IsNotEmpty()
-    category: Category[]
 
 }

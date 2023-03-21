@@ -1,23 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { LectureService } from './lecture.service';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { UpdateLectureDto } from './dto/update-lecture.dto';
 import {NotFoundException} from "@nestjs/common"
+import { AuthGuard } from 'src/guards/auth.guard';
 
 
 
-@Controller('lecture')
+@UseGuards(AuthGuard)
+@Controller()
 export class LectureController {
   constructor(private readonly lectureService: LectureService) {}
 
   @Post()
-  create(@Body() createLectureDto: CreateLectureDto) {
-    return this.lectureService.create(createLectureDto);
+  create(@Param('categoryId') categoryId: string ,@Body() createLectureDto: CreateLectureDto) {
+    return this.lectureService.create(createLectureDto, categoryId);
   }
 
   @Get()
-  findAll() {
-    return this.lectureService.findAll();
+  findAll(@Param('categoryId') categoryId: string) {
+
+    return this.lectureService.findAll(categoryId);
   }
 
   @Get(':id')

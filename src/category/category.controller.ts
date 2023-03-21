@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
-@Controller('category')
+
+
+@UseGuards(AuthGuard)
+@Controller()
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
@@ -21,6 +25,7 @@ export class CategoryController {
   findOne(@Param('id') id: string) {
     return this.categoryService.findOne(id);
   }
+
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
