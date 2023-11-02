@@ -1,24 +1,24 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserController } from './user.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from './entities/user.entity';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
+import { CrmUserController } from './controller/crm-user.controller';
+import { UserDocument, UserSchema } from './model/user.schema';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CurrentUserInterceptor } from './interceptors/current-user-interceptor';
+import { DatabaseModule } from 'src/libs/database';
+import { UserRepository } from './user.repository';
+import { panelUserController } from './controller/panel-user.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: 'User', schema: UserSchema}]),
+    DatabaseModule.forFeature([{name: UserDocument.name, schema: UserSchema}]),
   ],
   controllers: [
-    UserController,
-    AuthController
+    CrmUserController,
+    panelUserController
   ],
   providers: [
+    UserRepository,
     UserService, 
-    AuthService,
     {
       provide: APP_INTERCEPTOR,
       useClass: CurrentUserInterceptor

@@ -3,17 +3,14 @@ import { HydratedDocument } from "mongoose";
 import { UserLevelEnum } from "../dto/user-level-interface";
 import { Exclude } from "class-transformer";
 import { UserRoleEnum } from "../dto/user-role-enum";
+import { AbstractDocument } from "src/libs/database";
 
 
-export type UserDocument = HydratedDocument<User>;
 
-@Schema()
-export class User {
+@Schema({timestamps: true})
+export class UserDocument extends AbstractDocument {
     @Prop({required: true, unique: true})
     userName: string;
-
-    @Prop({enum: UserRoleEnum, default: UserRoleEnum.user})
-    role: UserRoleEnum;
 
     @Prop({required: true, unique: true})
     email: string;
@@ -26,12 +23,19 @@ export class User {
     mobileNumber: string;
 
     @Prop()
-    avatar: string;
+    avatar?: string;
 
     @Prop({enum: UserLevelEnum, default: UserLevelEnum.preInterMediate})
-    level: UserLevelEnum;
+    level?: UserLevelEnum;
+
+    @Prop({enum: UserRoleEnum, default: UserRoleEnum.user})
+    role?: UserRoleEnum;
+
 
 };
 
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(UserDocument);
+
+
+
