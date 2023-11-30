@@ -1,46 +1,61 @@
 ###
-GET http://localhost:3000/user
-
-
-###
-GET http://localhost:3000/user/63f11c9b0a21703294493137
-Content-Type: application/json
-
-
-###
-DELETE http://localhost:3000/user/63f1293e0a2170329449313b
+POST http://localhost:3333/crm/user
 Content-Type: application/json
 
 {
-
-}
-
-
-###
-POST http://localhost:3000/auth/signup
-Content-Type: application/json
-
-{
-    "userName": "mohamadhasanT",
-    "email": "tbz.mohamadhasanT@yahoo.com",
-    "mobileNumber": "+989142371301",
+    "userName": "mmdhsns",
+    "mobileNumber": "+989142371308",
+    "email": "mmdhsns.tabrizi@yahoo.com",
     "password": "95440012WEek",
     "avatar": "avatar.png",
-    "level": "upper-Intermediate"
+    "role": "Admin"
 }
 
 
+
 ###
-POST http://localhost:3000/auth/signin
+GET http://localhost:3333/crm/user
+Content-Type: application/json
+
+
+###
+GET http://localhost:3333/crm/user/65442650bd42e61e9064a23b
+Content-Type: application/json
+
+
+###
+PATCH http://localhost:3333/crm/user/65442035670459b8c02fa363
 Content-Type: application/json
 
 {
-    "email": "tbz.mohamadhasan@yahoo.com",
+    "userName": "mmdhsn1111"
+    
+}
+
+###
+DELETE http://localhost:3333/crm/user/65440f60d4c5e2ceb585e89c
+Content-Type: application/json
+
+{
+
+}
+
+###################################### ADMIN AUTH ###################################
+###################################### ADMIN AUTH ###################################
+###################################### ADMIN AUTH ###################################
+###################################### ADMIN AUTH ###################################
+
+###
+POST http://localhost:3333/crm/auth/signin
+Content-Type: application/json
+
+{
+    "email": "mmdhsns.tabrizi@yahoo.com",
     "password": "95440012WEek"
 }
 
 ###
-POST http://localhost:3000/auth/signout
+POST http://localhost:3333/crm/auth/signout
 Content-Type: application/json
 
 {
@@ -49,9 +64,59 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/auth/me
+GET http://localhost:3333/crm/auth/me
 
 
+###################################### USER AUTH ###################################
+###################################### USER AUTH ###################################
+###################################### USER AUTH ###################################
+###################################### USER AUTH ###################################
+
+
+###
+POST http://localhost:3333/panel/auth/signup
+Content-Type: application/json
+
+{
+    "userName": "mohamadhasanT",
+    "mobileNumber": "+989142371301",
+    "email": "tbz.mohamadhasanT@yahoo.com",
+    "password": "95440012WEek",
+    "avatar": "avatar.png",
+    "level": "upper-Intermediate",
+    "role": "User"
+}
+
+
+###
+POST http://localhost:3333/panel/auth/signin
+Content-Type: application/json
+
+{
+    "email": "tbz.mohamadhasanT@yahoo.com",
+    "password": "95440012WEek"
+}
+
+###
+POST http://localhost:3333/panel/auth/signout
+Content-Type: application/json
+
+{
+
+}
+
+
+###
+GET http://localhost:3333/panel/auth/me
+
+###  update PROFILE
+PATCH http://localhost:3333/panel/user
+Content-Type: application/json
+
+{
+    "userName": "mohamadhasanT111"
+    
+}
 
 ###################################### CATEGORY ###################################
 ###################################### CATEGORY ###################################
@@ -59,10 +124,10 @@ GET http://localhost:3000/auth/me
 ###################################### CATEGORY ###################################
 
 ###
-GET http://localhost:3000/category
+GET http://localhost:3333/category
 
 ###
-POST http://localhost:3000/category
+POST http://localhost:3333/category
 Content-Type: application/json
 
 {
@@ -72,11 +137,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/category/6414e61e945e9af71843537a
+GET http://localhost:3333/category/6414e61e945e9af71843537a
 Content-Type: application/json
 
 ###
-PATCH  http://localhost:3000/category/6414e61e945e9af71843537a
+PATCH  http://localhost:3333/category/6414e61e945e9af71843537a
 Content-Type: application/json
 
 {
@@ -87,7 +152,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/category/6414e61e945e9af71843537a
+DELETE http://localhost:3333/category/6414e61e945e9af71843537a
 Content-Type: application/json
 
 {
@@ -100,10 +165,10 @@ Content-Type: application/json
 ###################################### LECTURE ###################################
 
 ###
-GET http://localhost:3000/category/64154555153e9066bec76108/lecture
+GET http://localhost:3333/category/64154555153e9066bec76108/lecture
 
 ###
-POST http://localhost:3000/category/64154555153e9066bec76108/lecture
+POST http://localhost:3333/category/64154555153e9066bec76108/lecture
 Content-Type: application/json
 
 {
@@ -115,11 +180,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/category/64154555153e9066bec76108/lecture/6414f7fa4c94c70a56535551
+GET http://localhost:3333/category/64154555153e9066bec76108/lecture/6414f7fa4c94c70a56535551
 Content-Type: application/json
 
 ###
-PATCH  http://localhost:3000/category/64154555153e9066bec76108/lecture/6414f7fa4c94c70a56535551
+PATCH  http://localhost:3333/category/64154555153e9066bec76108/lecture/6414f7fa4c94c70a56535551
 Content-Type: application/json
 
 {
@@ -133,7 +198,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/category/64154555153e9066bec76108/lecture/6414f8324c94c70a56535556
+DELETE http://localhost:3333/category/64154555153e9066bec76108/lecture/6414f8324c94c70a56535556
 Content-Type: application/json
 
 {
@@ -147,10 +212,10 @@ Content-Type: application/json
 ###################################### VOCABULARY ###################################
 
 ###
-GET http://localhost:3000/vocabulary
+GET http://localhost:3333/vocabulary
 
 ###
-POST http://localhost:3000/vocabulary
+POST http://localhost:3333/vocabulary
 Content-Type: application/json
 
 {
@@ -167,11 +232,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/vocabulary/641508ae5457ecde8c4ba427
+GET http://localhost:3333/vocabulary/641508ae5457ecde8c4ba427
 Content-Type: application/json
 
 ###
-PATCH  http://localhost:3000/vocabulary/641508ae5457ecde8c4ba427
+PATCH  http://localhost:3333/vocabulary/641508ae5457ecde8c4ba427
 Content-Type: application/json
 
 {
@@ -180,7 +245,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:3000/vocabulary/6415083e7a6e2aeff57aab1d
+DELETE http://localhost:3333/vocabulary/6415083e7a6e2aeff57aab1d
 Content-Type: application/json
 
 {
@@ -195,10 +260,10 @@ Content-Type: application/json
 ###################################### USER_MEMORY_VOCAB ###################################
 
 ###
-GET http://localhost:3000/user-vocab-memory
+GET http://localhost:3333/user-vocab-memory
 
 ###
-POST http://localhost:3000/user-vocab-memory
+POST http://localhost:3333/user-vocab-memory
 Content-Type: application/json
 
 {
@@ -209,26 +274,26 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/user-vocab-memory/64153ed640a100ea7a2a9cc9
+GET http://localhost:3333/user-vocab-memory/64153ed640a100ea7a2a9cc9
 Content-Type: application/json
 
 ###
-PATCH  http://localhost:3000/user-vocab-memory/6415459e153e9066bec76113/correct
-Content-Type: application/json
-
-{
-    
-}
-###
-PATCH  http://localhost:3000/user-vocab-memory/6415459e153e9066bec76113/wrong
+PATCH  http://localhost:3333/user-vocab-memory/6415459e153e9066bec76113/correct
 Content-Type: application/json
 
 {
     
 }
+###
+PATCH  http://localhost:3333/user-vocab-memory/6415459e153e9066bec76113/wrong
+Content-Type: application/json
+
+{
+    
+}
 
 ###
-DELETE http://localhost:3000/user-vocab-memory/6415083e7a6e2aeff57aab1d
+DELETE http://localhost:3333/user-vocab-memory/6415083e7a6e2aeff57aab1d
 Content-Type: application/json
 
 {
@@ -242,7 +307,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/category
+GET http://localhost:3333/category
 
 ###
-GET http://localhost:3000/category/64154555153e9066bec76108/lecture
+GET http://localhost:3333/category/64154555153e9066bec76108/lecture

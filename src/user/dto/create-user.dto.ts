@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsMobilePhone, IsNotEmpty, MinLength } from "class-validator";
+import { IsString, IsEmail, IsMobilePhone, IsNotEmpty, MinLength, IsEnum } from "class-validator";
 import { UserLevelEnum } from "./user-level-interface";
 import { UserRoleEnum } from "./user-role-enum";
 
@@ -23,6 +23,8 @@ export class CreateUserDto {
 
     avatar?: string;
     level?: UserLevelEnum;
+
+    @IsEnum(UserRoleEnum)
     role?:UserRoleEnum;
 
 }
