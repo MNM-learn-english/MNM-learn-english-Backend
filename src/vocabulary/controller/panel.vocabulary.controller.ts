@@ -24,7 +24,6 @@ export class PanelVocabularyController {
         throw new BadRequestException('please choose lecture and category!')
       }
     const parnetVocabs = await this.vocabularyService.findAll({...filterQuery, isParent: true});
-    console.log("parnetVocabs", parnetVocabs)
     // get childs and add them
     const vocabWithChilds = await Promise.all(parnetVocabs.data.map(async(parent: VocabularyDocument) => {
       return {
