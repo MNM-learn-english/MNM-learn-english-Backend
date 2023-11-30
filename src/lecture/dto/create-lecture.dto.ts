@@ -1,5 +1,4 @@
-import { IsArray, IsNotEmpty, IsString } from "class-validator";
-import { Category } from "src/category/entities/category.entity";
+import { IsEnum, IsNotEmpty, IsString } from "class-validator";
 import { UserLevelEnum } from "src/user/dto/user-level-interface";
 
 export class CreateLectureDto {
@@ -7,19 +6,13 @@ export class CreateLectureDto {
     @IsNotEmpty()
     title: string;
 
-    @IsString()
+    @IsEnum(UserLevelEnum)
     @IsNotEmpty()
     level: UserLevelEnum;
 
-    @IsArray()
-    videos: string[];
-
     @IsString()
-    context: string;
+    description: string;
 
     @IsString()
     avatar: string;
-
-    @IsString()
-    category: Category;
 }

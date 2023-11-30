@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
 import { UserLevelEnum } from "../dto/user-level-interface";
 import { Exclude } from "class-transformer";
 import { UserRoleEnum } from "../dto/user-role-enum";

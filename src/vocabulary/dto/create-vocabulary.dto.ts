@@ -1,8 +1,4 @@
-import { IsArray, IsNotEmpty, IsString } from "class-validator";
-import { Category } from "src/category/entities/category.entity";
-import { Lecture } from "src/lecture/entities/lecture.entity";
-import { UserLevelEnum } from "src/user/dto/user-level-interface";
-import { VocabStatus } from "./vocab-status-enum";
+import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { VocabTypeEnum } from "./vocab-type-enum";
 
 export class CreateVocabularyDto {
@@ -18,7 +14,6 @@ export class CreateVocabularyDto {
     @IsNotEmpty()
     translationFa: string;
 
-
     @IsString()
     @IsNotEmpty()
     avatar: string;
@@ -27,15 +22,25 @@ export class CreateVocabularyDto {
     @IsNotEmpty()
     example: string;
 
-    @IsString()
-    level: UserLevelEnum;
-
-    @IsString()
+    @IsEnum(VocabTypeEnum)
     type: VocabTypeEnum;
 
     @IsString()
     @IsNotEmpty()
     meaning: string;
 
+    @IsString()
+    lecture: string;
+
+    @IsString()
+    category: string;
+
+    @IsOptional()
+    @IsBoolean()
+    isParent: boolean;
+
+    @IsOptional()
+    @IsString()
+    parent: string;
 
 }

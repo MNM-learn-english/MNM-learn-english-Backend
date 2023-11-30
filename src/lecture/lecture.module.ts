@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { LectureService } from './lecture.service';
-import { LectureController } from './lecture.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LectureSchema } from './entities/lecture.entity';
+import { LectureDocument, LectureSchema } from './model/lecture.schema';
+import { CrmLectureController } from './controller/crm.lecture.controller';
+import { PanelLectureController } from './controller/panel.lecture.controller';
+import { LectureRepository } from './lecture.repository';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: 'Lecture', schema: LectureSchema}])
+    MongooseModule.forFeature([{name: LectureDocument.name, schema: LectureSchema}])
   ],
-  controllers: [LectureController],
-  providers: [LectureService]
+  controllers: [CrmLectureController, PanelLectureController],
+  providers: [LectureService, LectureRepository]
 })
 export class LectureModule {}

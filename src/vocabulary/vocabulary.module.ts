@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
 import { VocabularyService } from './vocabulary.service';
-import { VocabularyController } from './vocabulary.controller';
+import { CrmVocabularyController } from './controller/crm.vocabulary.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { VocabularySchema } from './entities/vocabulary.entity';
+import { VocabularyDocument, VocabularySchema } from './model/vocabulary.schema';
+import { VocabularyRepository } from './vocabulary.repository';
+import { PanelVocabularyController } from './controller/panel.vocabulary.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: 'Vocabulary', schema: VocabularySchema}])
+    MongooseModule.forFeature([{name: VocabularyDocument.name, schema: VocabularySchema}])
   ],
-  controllers: [VocabularyController],
-  providers: [VocabularyService]
+  controllers: [CrmVocabularyController, PanelVocabularyController],
+  providers: [VocabularyService, VocabularyRepository]
 })
 export class VocabularyModule {}

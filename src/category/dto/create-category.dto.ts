@@ -8,10 +8,5 @@ export class CreateCategoryDto {
 
     @IsString()
     @IsNotEmpty()
-    description: string;
-
-    @IsString()
-    @IsNotEmpty()
-    avatar: string;
-
+    lecture: string;
 }

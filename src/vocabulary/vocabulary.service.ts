@@ -1,35 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { CreateVocabularyDto } from './dto/create-vocabulary.dto';
 import { UpdateVocabularyDto } from './dto/update-vocabulary.dto';
-import { Vocabulary, vocabularyDocument } from './entities/vocabulary.entity';
+import { VocabularyRepository } from './vocabulary.repository';
+import { VocabularyDocument } from './model/vocabulary.schema';
+
+
 
 @Injectable()
 export class VocabularyService {
-  constructor(@InjectModel('Vocabulary') private vocabularyModel: Model<vocabularyDocument>){}
+  constructor(
+    private readonly vocabRepo: VocabularyRepository
+  ){}
 
-  async create(createVocabularyDto: CreateVocabularyDto): Promise<Vocabulary> {
-    Object.assign(createVocabularyDto)
-    const newVocab = new this.vocabularyModel(createVocabularyDto);
-    return await newVocab.save();
+  async create(createVocabularyDto: CreateVocabularyDto): Promise<VocabularyDocument> {
+    return await this.vocabRepo.create(createVocabularyDto);
   }
 
-  async findAll(): Promise<Vocabulary[]> {
-    return await this.vocabularyModel.find().exec();
+  async findAll(filterQuery: FilterQuery<VocabularyDocument>) {
+    return await this.vocabRepo.find(filterQuery);
   }
 
-  async findOne(id: string): Promise<Vocabulary> {
-    return await this.vocabularyModel.findById(id).exec();
+  async find(filterQuery: FilterQuery<VocabularyDocument>) {
+    return await this.vocabRepo.findWithOutPaginationData(filterQuery);
   }
 
-  async update(id: string, updateVocabularyDto: UpdateVocabularyDto): Promise<Vocabulary> {
-    return await this.vocabularyModel.findByIdAndUpdate(id, updateVocabularyDto, {
-      new: true
-    });
+  async findOne(_id: string): Promise<VocabularyDocument> {
+    return await this.vocabRepo.findOne({_id});
   }
 
-  async remove(id: string) {
-    return await this.vocabularyModel.findByIdAndDelete(id);
+  async update(_id: string, updateVocabularyDto: UpdateVocabularyDto): Promise<VocabularyDocument> {
+    return await this.vocabRepo.findOneAndUpdate({_id}, updateVocabularyDto);
+  }
+
+  async remove(_id: string) {
+    return await this.vocabRepo.findOneAndDelete({_id});
   }
 }

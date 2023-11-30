@@ -1,35 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { CreateCategoryDto } from 'src/category/dto/create-category.dto';
+import { FilterQuery} from 'mongoose';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { UpdateLectureDto } from './dto/update-lecture.dto';
-import { Lecture, lectureDocument } from './entities/lecture.entity';
+import { LectureRepository } from './lecture.repository';
+import { LectureDocument } from './model/lecture.schema';
 
 @Injectable()
 export class LectureService {
-  constructor(@InjectModel('Lecture') private lectureModel: Model<lectureDocument>){}
+  constructor(
+    private readonly lectureRepo: LectureRepository
+  ){}
 
-  async create(createLectureDto: CreateLectureDto): Promise<Lecture> {
-    const newLecture = new this.lectureModel(createLectureDto);
-    return await newLecture.save();
+  async create(createLectureDto: CreateLectureDto): Promise<LectureDocument> {
+    return await this.lectureRepo.create(createLectureDto);
   }
 
-  async findAll(): Promise<Lecture[]> {
-    return await this.lectureModel.find().populate({path: "category", select: "title"}).exec();
+  async findAll(filterQuery: FilterQuery<LectureDocument>) {
+    return await this.lectureRepo.find(filterQuery);
   }
 
-  async findOne(id: string) : Promise<Lecture>{
-    return await this.lectureModel.findById(id).populate({path: "category", select: "title"}).exec();
+  async findOne(_id: string) : Promise<LectureDocument>{
+    return await this.lectureRepo.findOne({_id})
   }
 
-  async update(id: string, updateLectureDto: UpdateLectureDto): Promise<Lecture> {
-    return await this.lectureModel.findByIdAndUpdate(id, updateLectureDto, {
-      new: true
-    });
+  async update(_id: string, updateLectureDto: UpdateLectureDto): Promise<LectureDocument> {
+    return await this.lectureRepo.findOneAndUpdate({_id}, updateLectureDto)
   }
 
-  async remove(id: string) {
-    return await this.lectureModel.findByIdAndDelete(id);
+  async remove(_id: string) {
+    return await this.lectureRepo.findOneAndDelete({_id});
   }
 }

@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CategoryController } from './category.controller';
-import { CategorySchema } from './entities/category.entity';
+import { CategoryDocument, CategorySchema } from './model/category.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CrmCategoryController } from './controller/crm.category.controller';
+import { PanelCategoryController } from './controller/panel.category.controller';
+import { CategoryRepository } from './category.repository';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: 'Category', schema: CategorySchema}]),
+    MongooseModule.forFeature([{name: CategoryDocument.name, schema: CategorySchema}]),
   ],
-  controllers: [CategoryController],
-  providers: [CategoryService]
+  controllers: [CrmCategoryController, PanelCategoryController],
+  providers: [CategoryService, CategoryRepository]
 
   
 })

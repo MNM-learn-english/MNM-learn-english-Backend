@@ -97,7 +97,6 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument>{
         // handle pagination data
         const totalDocs = await this.model.count(JSON.parse(queryStr));
 
-        console.log("queryStr", JSON.parse(queryStr))
         return{
             data: await this.model.find(JSON.parse(queryStr), {},{lean: true})
                 .sort(sortBy)
