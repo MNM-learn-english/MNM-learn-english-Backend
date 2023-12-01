@@ -6,6 +6,7 @@ import { UserDocument } from './model/user.schema';
 import { UserRepository } from './user.repository';
 import { randomBytes } from "crypto";
 import * as bcrypt from "bcryptjs";
+import { SignInUserDto } from 'src/auth/dto/signin-user.dto';
 
 
 
@@ -27,6 +28,10 @@ export class UserService {
     
     delete newUser.password;
     return newUser;
+  }
+
+  async createUser(signinUserDto: SignInUserDto){
+    return await this.userRepo.create(signinUserDto)
   }
 
   async find(filterQuery: FilterQuery<UserDocument>){
